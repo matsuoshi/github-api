@@ -17,7 +17,7 @@ module.exports = {
   /**
    * GitHub API からクローズ済みプルリクエスト 最大100件を取得
    * @param params
-   * @returns {Promise<AxiosResponse<any>>}
+   * @returns {Promise}
    */
   async getPullRequests(params = {}) {
     params = Object.assign({
@@ -31,14 +31,14 @@ module.exports = {
   },
 
   /**
-   * 直近1年にクローズされたPRをフィルタリングして返す
+   * 直近1年にマージされたPRをフィルタリングして返す
    * @param pullRequests
    * @returns {*}
    */
   filterByDate(pullRequests) {
     const thresholdDate = dayjs().subtract(1, 'year')
     return pullRequests.filter(pr => {
-      return dayjs(pr.closed_at) >= thresholdDate
+      return dayjs(pr.merged_at) >= thresholdDate
     })
   },
 

@@ -31,12 +31,13 @@ describe('時刻のテスト', () => {
     MockDate.reset()
   })
 
-  test('直近1年でフィルタリング', () => {
+  test('直近1年にマージされたものでフィルタリング', () => {
     const actual = App.filterByDate([
-      { id: 1, closed_at: '2020-01-02T00:00:00Z' },
-      { id: 2, closed_at: '2020-01-01T00:00:00Z' },
-      { id: 3, closed_at: '2019-12-31T23:59:59Z' },
-      { id: 4, closed_at: '2019-12-30T00:00:00Z' },
+      { id: 1, merged_at: '2020-01-02T00:00:00Z' },
+      { id: 2, merged_at: '2020-01-01T00:00:00Z' },
+      { id: 3, merged_at: '2019-12-31T23:59:59Z' },
+      { id: 4, merged_at: '2019-12-30T00:00:00Z' },
+      { id: 5, merged_at: null},
     ])
     const ids = actual.map(obj => obj.id)
 
